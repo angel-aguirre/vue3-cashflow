@@ -5,6 +5,10 @@ module.exports = {
             colors: {
                 'brand-green': '#04b500',
                 'brand-blue': '#0689b0',
+                'dark-light': '#e5e5e5',
+            },
+            boxShadow: {
+                'slide-panel': '0 -8px 16px #e5e5e5',
             },
         },
     },
