@@ -11,7 +11,9 @@
                 :total-amount="totalAmount"
             >
                 <template #graphic>Graphic</template>
-                <template #action>Action</template>
+                <template #action>
+                    <Action />
+                </template>
             </Resume>
         </template>
         <template #movements>
@@ -24,6 +26,7 @@
 import Layout from '@/components/Layout.vue';
 import Header from '@/components/Header.vue';
 import Resume from '@/components/Resume/Index.vue';
+import Action from '@/components/Action.vue';
 import Movements from '@/components/Movements/Index.vue';
 
 const label = 'Ahorro total';
