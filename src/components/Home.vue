@@ -11,7 +11,7 @@
                 :total-amount="totalAmount"
             >
                 <template #graphic>
-                    <Graphic />
+                    <Graphic :amounts="amounts" />
                 </template>
                 <template #action>
                     <Action />
@@ -69,4 +69,6 @@ const movements = [
         amount: '1000',
     },
 ];
+
+const amounts = [100, 200, 500, 200, -400, -600, -300, 0, 300, 700];
 </script>
