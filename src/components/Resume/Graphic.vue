@@ -36,7 +36,9 @@
 </template>
 
 <script setup>
-import { defineProps, toRefs, computed, ref } from 'vue';
+import { defineProps, defineEmits, toRefs, computed, ref } from 'vue';
+
+const emit = defineEmits(['select']);
 
 const props = defineProps({
     amounts: {
@@ -79,6 +81,7 @@ const tap = ({ target, touches }) => {
     const elementX = target.getBoundingClientRect().x;
     const touchX = touches[0].clientX;
     pointer.value = ((touchX - elementX) * 300) / elementWidth;
+    emit('select', pointer.value);
 };
 
 const untap = ({ target, touches }) => {
