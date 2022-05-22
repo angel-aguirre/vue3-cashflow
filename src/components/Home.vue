@@ -11,7 +11,7 @@
                 :total-amount="totalAmount"
             >
                 <template #graphic>
-                    <Graphic :amounts="amounts" />
+                    <Graphic @select="select" :amounts="amounts" />
                 </template>
                 <template #action>
                     <Action @create="create" />
@@ -33,9 +33,9 @@ import Action from '@/components/Action.vue';
 import Movements from '@/components/Movements/Index.vue';
 import { ref, computed, onMounted } from 'vue';
 
-const label = 'Ahorro total';
+const label = ref('Ahorro total');
 const date = '11  de Mayo de 2022';
-const amount = null;
+const amount = ref(null);
 
 const movements = ref([]);
 
@@ -60,7 +60,7 @@ const amounts = computed(() => {
         .map((m) => m.amount);
 
     return lastDays.map((m, i) => {
-        const lastMovements = lastDays.slice(0, i);
+        const lastMovements = lastDays.slice(0, i + 1);
         return lastMovements.reduce((suma, movement) => {
             return suma + movement;
         }, 0);
@@ -85,5 +85,9 @@ const remove = (id) => {
 
 const save = () => {
     localStorage.setItem('movements', JSON.stringify(movements.value));
+};
+
+const select = (movement) => {
+    amount.value = movement;
 };
 </script>
