@@ -14,12 +14,12 @@
                     <Graphic :amounts="amounts" />
                 </template>
                 <template #action>
-                    <Action />
+                    <Action @create="create" />
                 </template>
             </Resume>
         </template>
         <template #movements>
-            <Movements :movements="movements" />
+            <Movements @remove="remove" :movements="movements" />
         </template>
     </Layout>
 </template>
@@ -31,14 +31,14 @@ import Resume from '@/components/Resume/Index.vue';
 import Graphic from '@/components/Resume/Graphic.vue';
 import Action from '@/components/Action.vue';
 import Movements from '@/components/Movements/Index.vue';
-import { computed } from 'vue';
+import { ref, computed } from 'vue';
 
 const label = 'Ahorro total';
 const date = '11  de Mayo de 2022';
 const amount = 1000;
 const totalAmount = 100000;
 
-const movements = [
+const movements = ref([
     {
         id: 0,
         title: 'Movimiento 1',
@@ -109,10 +109,10 @@ const movements = [
         amount: 500,
         time: new Date('05-19-2022'),
     },
-];
+]);
 
 const amounts = computed(() => {
-    const lastDays = movements
+    const lastDays = movements.value
         .filter((m) => {
             const today = new Date();
             const oldDate = today.setDate(today.getDate() - 30);
@@ -127,4 +127,12 @@ const amounts = computed(() => {
         return lastMovements.reduce((suma, movement) => suma + movement, 0);
     });
 });
+
+const create = (movement) => {
+    movements.value.push(movement);
+};
+
+const remove = (id) => {
+    movements.value = movements.value.filter((m) => m.id !== id);
+};
 </script>
