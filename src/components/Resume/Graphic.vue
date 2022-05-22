@@ -50,8 +50,9 @@ const props = defineProps({
 const { amounts } = toRefs(props);
 
 const amountToPixels = (amount) => {
-    const min = Math.min(...amounts.value);
-    const max = Math.max(...amounts.value);
+    const amnts = amounts.value.length ? amounts.value : [0];
+    const min = Math.min(...amnts);
+    const max = Math.max(...amnts);
     const amountAbs = amount + Math.abs(min);
     const minmax = Math.abs(max) + Math.abs(min);
     const pixels = 200 - ((amountAbs * 100) / minmax) * 2;
